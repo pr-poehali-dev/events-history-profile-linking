@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 
 const SERVICES = [
@@ -62,6 +63,7 @@ const NUMBERS = [
 export default function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
   const revealRefs = useRef<HTMLElement[]>([]);
+  const navigate = useNavigate();
 
   // Intersection Observer for reveal animations
   useEffect(() => {
@@ -107,9 +109,18 @@ export default function Index() {
             </a>
           ))}
         </div>
-        <button className="btn-gold hidden md:block">
-          <span>Обсудить проект</span>
-        </button>
+        <div className="hidden md:flex items-center gap-3">
+          <button
+            onClick={() => navigate("/complaints")}
+            className="btn-outline-gold flex items-center gap-2"
+          >
+            <Icon name="ShieldAlert" size={13} />
+            Журнал жалоб
+          </button>
+          <button className="btn-gold">
+            <span>Обсудить проект</span>
+          </button>
+        </div>
         <button
           className="md:hidden text-foreground"
           onClick={() => setMenuOpen(!menuOpen)}
